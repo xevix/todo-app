@@ -1,15 +1,20 @@
 package tables
 
-import slick.driver.H2Driver.api._
-import slick.lifted.{ ProvenShape }
+import slick.driver.JdbcProfile
 
-case class TodoItem(body: String, id: Option[Int] = None)
+trait TodoItemsTable {
+  protected val driver: JdbcProfile
+  import driver.api._
 
-class TodoItems(tag: Tag) extends Table[TodoItem](tag, "todo_items") {
+  case class TodoItem(body: String, id: Option[Int] = None)
 
-  def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
-  def body = column[String]("body")
+  class TodoItems(tag: Tag) extends Table[TodoItem](tag, "todo_items") {
 
-  def * = (body, id.?) <> (TodoItem.tupled, TodoItem.unapply)
+    def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
+    def body = column[String]("body")
+
+    def * = (body, id.?) <> (TodoItem.tupled, TodoItem.unapply)
+
+  }
 
 }
