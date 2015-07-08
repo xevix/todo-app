@@ -1,7 +1,34 @@
-@(message: String)
+@(message: String, todos: Seq[tables.TodoItem])
 
-@main("Welcome to Play") {
+<!DOCTYPE html>
 
-  @play20.welcome(message)
+<html>
+    <head>
+    </head>
+    <body>
+	DEBUG: @message
+	<table>
+	    <tr>
+		<th>Monday</th>
+		<th>Tuesday</th>
+		<th>Wednesday</th>
+		<th>Thursday</th>
+		<th>Friday</th>
+	    </tr>
+	     @for(todo <- todos) {
+			 <tr>
+			     <td><input type="checkbox"
+					@if(todo.complete) {
+					checked
+					}
+					>
+					@todo.body</td>
+			     <td></td>
+			     <td></td>
+			     <td></td>
+			     <td></td>
+			 </tr>
+	    }
 
-}
+    </body>
+</html>
