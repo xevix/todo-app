@@ -17,12 +17,14 @@
 	    </tr>
 	     @for(todo <- todos) {
 			 <tr>
-			     <td><input type="checkbox"
-					@if(todo.complete) {
-					checked
-					}
-					>
-					@todo.body</td>
+			     <td>
+					 @if(todo.complete) {
+						 <input type="checkbox" checked>
+					 } else {
+						 <input type="checkbox">
+					 }
+					@todo.body
+				 </td>
 			     <td></td>
 			     <td></td>
 			     <td></td>
